@@ -12,6 +12,7 @@
                                                  (number?)
                                                  jsexpr?)]
           [transmission-request-successful? (-> jsexpr? boolean?)]
+          [transmission-response-tag        (-> jsexpr? number?)]
           [transmission-response-args       (-> jsexpr? jsexpr?)]
           [transmission-response-arg        (-> jsexpr? symbol? jsexpr?)]))
 
@@ -75,3 +76,7 @@
 ;; Returns a particular response argument of a RPC request
 (define (transmission-response-arg response arg)
   (hash-ref (transmission-response-args response) arg))
+
+;; Returns the response tag number
+(define (transmission-response-tag response)
+  (hash-ref response 'tag))
