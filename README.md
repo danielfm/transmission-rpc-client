@@ -17,8 +17,8 @@ To import the library:
 (require transmission-rpc-client)
 ````
 
-In the next example, we'll send a `session-stats` request and fetched the number
-of currently active torrents.
+In the next example, we'll send a `session-stats` request and fetch the current
+number of active torrents.
 
 ````racket
 
@@ -29,15 +29,13 @@ of currently active torrents.
 ;; Returns a jsexpr with current session stats
 (define stats (transmission-request! session "session-stats" null))
 
-;; Retrieving a specific response argument
+;; Retrieves a specific response argument
 (transmission-response-arg stats 'torrentCount)
 ````
 
 And here's how we get the progress of all active torrents along with their name:
 
 ````racket
-
-;; Assuming we already have a session...
 
 ;; Sends a request with tag number = 1234
 (define progress
@@ -47,11 +45,17 @@ And here's how we get the progress of all active torrents along with their name:
 
 ;; Returns a list where each entry is a hash containing the keys
 ;; 'name (string) and 'percentDone (number 0 < n < 1)
-(transmission-response-arg progress 'torrents)
+(define torrents (transmission-response-arg progress 'torrents))
+
+;; Fetching the first torrent's progress
+(hash-ref (first torrents) 'percentDone)
 
 ;; The response tag number should match the one sent in the request (1234)
 (transmission-response-tag progress)
 ````
+
+Please read the [Transmission RFC spec](https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt)
+to know the supported requests, their parameters and response.
 
 ## License
 
