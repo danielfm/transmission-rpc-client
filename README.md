@@ -47,7 +47,7 @@ And here's how we get the progress of all active torrents along with their name:
 ;; 'name (string) and 'percentDone (number 0 < n < 1)
 (define torrents (transmission-response-arg progress 'torrents))
 
-;; Fetching the first torrent's progress
+;; Fetches the first torrent's progress
 (hash-ref (first torrents) 'percentDone)
 
 ;; The response tag number should match the one sent in the request (1234)
