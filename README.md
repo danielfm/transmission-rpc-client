@@ -5,8 +5,12 @@ client for Racket.
 
 ## Installation
 
-This package is not yet available for download via [PLaneT](http://planet.racket-lang.org/).
-Just hang in there!
+To install this library from github:
+
+````bash
+
+$ raco pkg install git://github.com/danielfm/transmission-rpc-client
+````
 
 ## Usage
 
